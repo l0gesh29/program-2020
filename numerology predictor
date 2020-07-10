@@ -1,0 +1,86 @@
+#include<stdio.h>
+#include<ctype.h>
+int func(int n,int a)
+{
+	a+=n%10;
+	n=n/10;
+	if(n>=10)
+	func(n,a);
+	else
+	{
+	a+=n;
+	if(a>=10)
+	func(a,0);
+	else
+	{
+	return a;
+	}
+	}
+}
+int main()
+{
+	int i,a[3],ftotal=0,total,sum=0,s=0,t=0,d=0;
+	scanf("%d-%d-%d",&a[0],&a[1],&a[2]);
+	char str[20];
+	scanf("%s",str);
+	for(i=0;i<3;i++)
+	{
+		if(a[i]>=10)
+		{
+			
+			total=func(a[i],sum);
+			ftotal+=total;
+		}
+		else
+		{
+			ftotal+=a[i];
+		}
+	}
+	if(ftotal>=10)
+	{
+		ftotal=func(ftotal,sum);
+	    printf("Life path number : %d\n",ftotal);
+	}
+	else
+	printf("Life path number : %d\n",ftotal);
+	for(int j=0;j<sizeof(str);j++)
+	{
+		sum=0;
+		d=0;
+		if(str[j]=='\0')
+		{	t+=s;
+			break;
+		}
+		if(isupper(str[j]))
+		{
+			if(s>0)
+			{
+				
+				t+=s;
+				s=0;
+			}
+		}
+		if(islower(str[j]))
+		{
+			str[j]=toupper(str[j]);
+		}
+	    d+=func(str[j],sum)-1;
+	    if(d==0)
+	    {
+	    	d=9;
+	    }
+	    s+=d;
+	}
+	 if(t>=10)
+	 {
+	 	t=func(t,0);
+	 	printf("Destiny Number is : %d\n",t);
+	 }
+	 else
+	 	printf("Destiny Number is : %d",t);
+	if(ftotal==t)
+		printf("Lucky");
+	else
+		printf("Not Lucky");
+	return 0;
+}
